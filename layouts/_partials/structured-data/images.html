@@ -1,0 +1,32 @@
+{{- /*
+Returns the absolute URLs of the images that describe a page.
+
+Uses, in order: the `images` front matter field (the same field that Hugo's embedded
+Open Graph and X templates use), then the page resources of type image whose name
+contains "feature", "cover" or "thumbnail", then any image resource.
+
+@context {page} .
+@returns {slice} A slice of absolute URLs, possibly empty.
+*/ -}}
+{{- $urls := slice -}}
+{{- with .Params.images -}}
+  {{- range . -}}
+    {{- $src := . -}}
+    {{- with $.Resources.Get $src -}}
+      {{- $urls = $urls | append .Permalink -}}
+    {{- else -}}
+      {{- $urls = $urls | append ($src | absURL) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $urls -}}
+  {{- $img := .Resources.GetMatch "*{feature,cover,thumbnail}*" -}}
+  {{- if and $img (eq $img.ResourceType "image") -}}
+    {{- $urls = $urls | append $img.Permalink -}}
+  {{- else -}}
+    {{- with .Resources.ByType "image" -}}
+      {{- $urls = $urls | append (index . 0).Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $urls -}}

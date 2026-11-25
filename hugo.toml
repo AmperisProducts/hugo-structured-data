@@ -1,0 +1,31 @@
+# Module configuration for hugo-structured-data.
+# Override any default under [params.structuredData] in your project configuration.
+
+[module.hugoVersion]
+  min = "0.158.0"
+
+[params.structuredData]
+  # Sections whose regular pages are described as articles. Empty means the site's main sections.
+  articleSections = []
+  # Schema.org type for those pages: "Article", "BlogPosting", "NewsArticle" or "TechArticle".
+  articleType = "Article"
+  # Add a BreadcrumbList built from the page's ancestors.
+  breadcrumbs = true
+
+  # The organization that publishes the site. Leave the name empty to omit it.
+  [params.structuredData.organization]
+    type = "Organization"
+    name = ""
+    legalName = ""
+    url = ""
+    logo = ""
+    email = ""
+    telephone = ""
+    vatID = ""
+    sameAs = []
+    [params.structuredData.organization.address]
+      streetAddress = ""
+      addressLocality = ""
+      addressRegion = ""
+      postalCode = ""
+      addressCountry = ""

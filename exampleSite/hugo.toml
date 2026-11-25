@@ -1,0 +1,28 @@
+baseURL = "https://example.org/"
+title = "Example Site"
+theme = "hugo-structured-data"
+themesDir = "../.."
+defaultContentLanguage = "en"
+disableKinds = ["taxonomy", "term", "rss"]
+
+[params.structuredData]
+  articleSections = ["blog"]
+  articleType = "BlogPosting"
+  [params.structuredData.organization]
+    name = "Example Ltd"
+    logo = "/logo.png"
+    sameAs = ["https://www.linkedin.com/company/example"]
+    [params.structuredData.organization.address]
+      addressLocality = "Lugo"
+      addressCountry = "ES"
+
+[languages.en]
+  label = "English"
+  locale = "en-US"
+  weight = 1
+  contentDir = "content/en"
+[languages.es]
+  label = "Español"
+  locale = "es-ES"
+  weight = 2
+  contentDir = "content/es"
